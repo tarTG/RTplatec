@@ -17,7 +17,7 @@
 *  License along with this library; if not, see http://www.gnu.org/licenses/
 *****************************************************************************/
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/utils.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 namespace Platec {

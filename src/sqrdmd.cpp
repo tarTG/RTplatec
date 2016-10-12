@@ -29,9 +29,9 @@
 #ifdef __MINGW32__ // this is to avoid a problem with the hypot function which is messed up by Python...
 #undef __STRICT_ANSI__
 #endif
-#include "RenderingHandler/terrainGenerator/plate-tectonics/simplerandom.hpp"
+#include "simplerandom.hpp"
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/sqrdmd.hpp"
+#include "sqrdmd.hpp"
 
 using namespace std;
 

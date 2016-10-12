@@ -17,9 +17,9 @@
  *  License along with this library; if not, see http://www.gnu.org/licenses/
  *****************************************************************************/
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/lithosphere.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/plate.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/platecapi.hpp"
+#include "lithosphere.hpp"
+#include "plate.hpp"
+#include "platecapi.hpp"
 #include <stdlib.h>
 #include <stdio.h>
 

@@ -17,10 +17,10 @@
  *  License along with this library; if not, see http://www.gnu.org/licenses/
  *****************************************************************************/
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/segment_creator.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/movement.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/segments.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/bounds.hpp"
+#include "segment_creator.hpp"
+#include "movement.hpp"
+#include "segments.hpp"
+#include "bounds.hpp"
 
 uint32_t MySegmentCreator::calcDirection(uint32_t x, uint32_t y, const uint32_t origin_index, const uint32_t ID) const
 {

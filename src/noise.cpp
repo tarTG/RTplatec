@@ -19,10 +19,10 @@
 
 #include <string>
 #include <math.h>
-#include "RenderingHandler/terrainGenerator/plate-tectonics/noise.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/sqrdmd.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/simplexnoise.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/utils.hpp"
+#include "noise.hpp"
+#include "sqrdmd.hpp"
+#include "simplexnoise.hpp"
+#include "utils.hpp"
 
 static const float SQRDMD_ROUGHNESS = 0.35f;
 static const float SIMPLEX_PERSISTENCE = 0.25f;

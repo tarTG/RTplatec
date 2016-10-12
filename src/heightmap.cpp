@@ -17,7 +17,7 @@
  *  License along with this library; if not, see http://www.gnu.org/licenses/
  *****************************************************************************/
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/heightmap.hpp"
+#include "heightmap.hpp"
 
 #include <stdexcept> // std::invalid_argument
 

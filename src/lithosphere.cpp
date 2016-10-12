@@ -17,12 +17,12 @@
  *  License along with this library; if not, see http://www.gnu.org/licenses/
  *****************************************************************************/
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/lithosphere.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/plate.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/sqrdmd.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/simplexnoise.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/noise.hpp"
-#include "RenderingHandler/terrainGenerator/FractalGenerator.h"
+#include "lithosphere.hpp"
+#include "plate.hpp"
+#include "sqrdmd.hpp"
+#include "simplexnoise.hpp"
+#include "noise.hpp"
+//#include "RenderingHandler/terrainGenerator/FractalGenerator.h"
 
 #include <cfloat>
 #include <cmath>
@@ -33,7 +33,6 @@
 #include <iostream>
 #include <algorithm>
 #include <numeric>
-#include <IL/il.h>
 
 #define BOOL_REGENERATE_CRUST   1
 
@@ -74,7 +73,7 @@ void lithosphere::createSlowNoise(float* tmp, const WorldDimension& tmpDim)
 
 lithosphere::lithosphere(long seed, uint32_t width, uint32_t height, float sea_level,
                           float _folding_ratio, uint32_t aggr_ratio_abs,
-                         float aggr_ratio_rel,  uint32_t _max_plates, float roughness, ILuint texData ) throw(invalid_argument) :
+                         float aggr_ratio_rel,  uint32_t _max_plates, float roughness ) throw(invalid_argument) :
                      
     hmap(width, height),
     amap(width, height),
@@ -100,15 +99,9 @@ lithosphere::lithosphere(long seed, uint32_t width, uint32_t height, float sea_l
         throw runtime_error("Width and height should be >=5");
     }
 
-    if(texData == 0)
-    {
+
         FractalGenerator::generateNoise(hmap.raw_data(),width,height,seed,roughness);
-    }
-    else
-    {
-        ilBindImage(texData);
-        memcpy(hmap.raw_data(),ilGetData(),height*width*sizeof(float));
-    }
+
     const uint32_t A = _worldDimension.getArea();
     float lowest = *std::min_element(hmap.raw_data(), hmap.raw_data() +A);
     float highest = *std::max_element(hmap.raw_data(), hmap.raw_data() +A);

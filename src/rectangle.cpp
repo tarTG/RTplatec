@@ -18,8 +18,8 @@
  *****************************************************************************/
 
 #include <stdexcept>
-#include "RenderingHandler/terrainGenerator/plate-tectonics/rectangle.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/utils.hpp"
+#include "rectangle.hpp"
+#include "utils.hpp"
 
 namespace Platec {
 

@@ -17,7 +17,7 @@
 *  License along with this library; if not, see http://www.gnu.org/licenses/
 *****************************************************************************/
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/bounds.hpp"
+#include "bounds.hpp"
 
 Bounds::Bounds(const WorldDimension& worldDimension, const FloatPoint& position,
                const Dimension& dimension)
