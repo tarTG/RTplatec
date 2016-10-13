@@ -20,4 +20,4 @@ add_subdirectory("3rdParty")
 add_subdirectory("src")
 IF(INTEGRATION_TEST)
     add_subdirectory("test")
-ENDIF
+ENDIF()
