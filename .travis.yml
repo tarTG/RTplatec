@@ -24,7 +24,7 @@ matrix:
 
 script:
     - mkdir build && cd build
-    - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE}  ..
+    - cmake ..
     - make all
 
 before_install:
