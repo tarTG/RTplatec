@@ -1,0 +1,30 @@
+
+language: generic
+
+dist: trusty
+sudo: required
+
+cache:
+    apt: true
+
+compiler:
+    - gcc
+    - clang
+
+matrix:
+    include:
+    - env: CXX=g++-6 CC=gcc-6
+      addons:
+        apt:
+          packages:
+            - g++-6
+          sources: &sources
+            - ubuntu-toolchain-r-test
+
+
+script:
+    - mkdir build && cd build
+    - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE}  ..
+    - make all
+
+before_install:
