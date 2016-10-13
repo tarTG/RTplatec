@@ -17,5 +17,7 @@ add_library(RTplatec
 	lithosphere.cpp  
 	plate.cpp      
 	segments.cpp         
-	world_point.cpp)
+	world_point.cpp
+        FractalGenerator.cpp
+        $<TARGET_OBJECTS:noiseUtils>)
 

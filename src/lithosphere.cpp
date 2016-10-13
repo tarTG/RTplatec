@@ -22,7 +22,7 @@
 #include "sqrdmd.hpp"
 #include "simplexnoise.hpp"
 #include "noise.hpp"
-//#include "RenderingHandler/terrainGenerator/FractalGenerator.h"
+#include "FractalGenerator.h"
 
 #include <cfloat>
 #include <cmath>

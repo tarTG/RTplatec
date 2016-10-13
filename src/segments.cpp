@@ -17,7 +17,7 @@
  *  License along with this library; if not, see http://www.gnu.org/licenses/
  *****************************************************************************/
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/segments.hpp"
+#include "segments.hpp"
 
 Segments::Segments(uint32_t plate_area)
 {

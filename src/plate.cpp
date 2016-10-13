@@ -28,11 +28,11 @@
 #include <stdexcept> // std::invalid_argument
 #include <assert.h>
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/plate.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/heightmap.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/rectangle.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/utils.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/plate_functions.hpp"
+#include "plate.hpp"
+#include "heightmap.hpp"
+#include "rectangle.hpp"
+#include "utils.hpp"
+#include "plate_functions.hpp"
 
 using namespace std;
 

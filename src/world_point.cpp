@@ -17,8 +17,8 @@
  *  License along with this library; if not, see http://www.gnu.org/licenses/
  *****************************************************************************/
 
-#include "RenderingHandler/terrainGenerator/plate-tectonics/world_point.hpp"
-#include "RenderingHandler/terrainGenerator/plate-tectonics/rectangle.hpp"
+#include "world_point.hpp"
+#include "rectangle.hpp"
 
 WorldPoint::WorldPoint(uint32_t x, uint32_t y, const WorldDimension& dim)
     : _x(x), _y(y)
