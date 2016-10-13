@@ -9,6 +9,7 @@ find_package(LibNoise REQUIRED)
 
 include_directories("include" )
 include_directories("3rdParty/noiseutils" )
+include_directories("3rdParty/GL3W" )
 
 include_directories("${LIBNOISE_INCLUDE_DIR}" )
 
