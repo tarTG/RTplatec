@@ -132,7 +132,7 @@ int main(int argc, char** argv)
            ground->update();
            setTexture(textureID,pixelBuffer,ground->getTopography());
         }
-        input->update();
+
         render->clearWindow();
         glBindVertexArray(vao);
         glUseProgram(shaderID);
@@ -144,6 +144,7 @@ int main(int argc, char** argv)
         glBindTexture(GL_TEXTURE_2D, 0);
         glUseProgram(0);
         render->render();
+         input->update();
         frameTime = 1.f/(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - timeBeforeLoop).count()/1000.f);        // the difference
   
     }

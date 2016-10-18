@@ -16,7 +16,7 @@
 
 
 
-simpleRender::simpleRender(u_int32_t windowHeight, uint32_t windowLength, std::string windowTitle) :
+simpleRender::simpleRender(u_int32_t windowLength, uint32_t windowHeight, std::string windowTitle) :
 windowHeight(windowHeight),windowLength(windowLength), windowTitle(windowTitle)
 {
 }
