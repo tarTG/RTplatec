@@ -30,7 +30,10 @@ script:
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y libnoise-dev
-    - sudo apt-get install -y libglfw3-dev
+    - mkdir glfw
+    - cd glfw
+    - git clone https://github.com/glfw/glfw && mkdir build && cd build && cmake ../glfw && make -j4 && sudo make install
+    - cd .. 
     - mkdir gl3w
     - cd gl3w
     - wget https://github.com/skaslev/gl3w/archive/master.zip 
