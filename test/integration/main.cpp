@@ -21,7 +21,6 @@
 #include <GLFW/glfw3.h>
 #include <chrono>
 
-typedef std::pair<std::unique_ptr<lithosphere>*, TwBar* > restartPair;
 
 std::unique_ptr<lithosphere> ground;
 float seed;
@@ -139,8 +138,8 @@ int main(int argc, char** argv)
         glUseProgram(shaderID);
         glActiveTexture(GL_TEXTURE0 );
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glUniform1f(glGetUniformLocation(shaderID, ""),1.0);
-        
+        glUniform1f(glGetUniformLocation(shaderID, "windowLength"),windowLength);
+         glUniform1f(glGetUniformLocation(shaderID, "windowHeigth"),windowHeight);      
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         glBindTexture(GL_TEXTURE_2D, 0);
         glUseProgram(0);

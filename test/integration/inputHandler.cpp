@@ -23,9 +23,15 @@ void  WindowSizeCB(int width, int height)
 }
 inputHandler::inputHandler(GLFWwindow* window) : window(window)
 {
+    int width, height;
+     	glfwGetWindowSize(window,&width, &height);
     // Initialize AntTweakBar
-    TwInit(TW_OPENGL, nullptr);
+    TwInit(TW_OPENGL_CORE, NULL);
+     TwWindowSize(width, height); 
+    
+    
     // Set GLFW event callbacks
+    
     // - Redirect window size changes to the callback function WindowSizeCB
     glfwSetWindowSizeCallback(window,(GLFWwindowsizefun)WindowSizeCB);
     // - Directly redirect GLFW mouse button events to AntTweakBar

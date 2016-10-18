@@ -22,7 +22,7 @@
 class simpleRender 
 {
 public:
-    simpleRender(u_int32_t windowHeight, uint32_t windowLength,std::string windowTitle);
+    simpleRender(u_int32_t windowLength, uint32_t windowHeight,std::string windowTitle);
     
     u_int32_t init();
     

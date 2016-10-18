@@ -18,7 +18,6 @@ find_package(X11 REQUIRED)
 find_package(AntTweakBar REQUIRED)
 find_package(OpenGL REQUIRED)
 
-MESSAGE("!!!!!!! ${GLFW_INCLUDE_DIRS}")
 
 include_directories("${GLFW_INCLUDE_DIRS}" )
 include_directories("${ANTTWEAKBAR_INCLUDE_DIR}" )
