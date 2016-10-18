@@ -28,8 +28,8 @@ script:
     - make all
 
 before_install:
-    -   - echo "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
-            echo "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee
+    - echo "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list 
+    - echo "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee
     - sudo apt-get -qq update
     - sudo apt-get install -y libnoise-dev
     - sudo apt-get install libglfw3 libglfw3-dev
