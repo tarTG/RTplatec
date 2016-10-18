@@ -28,12 +28,11 @@ script:
     - make all
 
 before_install:
+    -   - echo "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+            echo "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee
     - sudo apt-get -qq update
     - sudo apt-get install -y libnoise-dev
-    - mkdir glfw
-    - cd glfw
-    - git clone https://github.com/glfw/glfw && mkdir build && cd build && cmake ../glfw && make -j4 && sudo make install
-    - cd .. 
+    - sudo apt-get install libglfw3 libglfw3-dev
     - mkdir gl3w
     - cd gl3w
     - wget https://github.com/skaslev/gl3w/archive/master.zip 
