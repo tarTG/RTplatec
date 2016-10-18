@@ -37,7 +37,7 @@ before_install:
     - wget https://github.com/skaslev/gl3w/archive/master.zip 
     - unzip master.zip
     - cd gl3w-master
-    - python gl3w_gen.py
+    - python3 gl3w_gen.py
     - mkdir build
     - cd build
     - cmake ..
