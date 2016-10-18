@@ -10,14 +10,14 @@ add_executable(
 SET(SHADER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Shader/")
 ADD_DEFINITIONS(-DSHADER_PATH="\\"${SHADER_PATH}\\"")
 
-MESSAGE("\"${SHADER_PATH}\"")
+
 
 find_package(PkgConfig REQUIRED)
 
-pkg_search_module(GLFW REQUIRED glfw3)
+find_package(GLFW REQUIRED)
 find_package(AntTweakBar REQUIRED)
 find_package(OpenGL REQUIRED)
-
+MESSAGE("!!!!!!! ${GLFW_INCLUDE_DIR}")
 
 include_directories("${GLFW_INCLUDE_DIR}" )
 include_directories("${ANTTWEAKBAR_INCLUDE_DIR}" )
