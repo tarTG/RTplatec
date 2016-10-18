@@ -30,3 +30,34 @@ script:
 before_install:
     - sudo apt-get -qq update
     - sudo apt-get install -y libnoise-dev
+    - sudo apt-get install -y libglfw3-dev
+    - mkdir gl3w
+    - cd gl3w
+    - wget https://github.com/skaslev/gl3w/archive/master.zip 
+    - unzip master.zip
+    - cd gl3w-master
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
+    - sudo make install
+    - cd ..
+    - cd ..
+    - cd ..
+    - mkdir anttweakbar
+    - cd anttweakbar
+    - wget 'https://sourceforge.net/projects/anttweakbar/files/AntTweakBar_116.zip' 
+    - unzip AntTweakBar_116.zip
+    - cd AntTweakBar
+    - cd src
+    - make
+    - cd ..
+    - cd include 
+    - sudo cp AntTweakBar.h /usr/local/include
+    - cd ..
+    - cd lib
+    - sudo cp libAntTweakBar.so /usr/local/lib/
+    - cd ..
+    - cd ..
+    - cd ..
+    

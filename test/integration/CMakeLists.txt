@@ -2,7 +2,15 @@
 add_executable(
     main
     main.cpp
+    simpleRender.cpp
+    inputHandler.cpp
+    ShaderLoader.cpp
 )
+
+SET(SHADER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Shader/")
+ADD_DEFINITIONS(-DSHADER_PATH="\\"${SHADER_PATH}\\"")
+
+MESSAGE("\"${SHADER_PATH}\"")
 
 find_package(PkgConfig REQUIRED)
 

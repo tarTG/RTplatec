@@ -18,6 +18,5 @@ add_definitions( -std=c++14 )
 
 add_subdirectory("3rdParty")
 add_subdirectory("src")
-IF(INTEGRATION_TEST)
+
     add_subdirectory("test")
-ENDIF()
