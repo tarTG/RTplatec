@@ -20,8 +20,8 @@ out vec3 color;
 
 void main() 
 {
-    color.x = getTexValue(rock,0.0,0.0).x ;
-    color.y = getTexValue(rock,0.0,0.0).x -1.5;
-    color.z = getTexValue(rock,0.0,0.0).x -3.0;
+    color.x = getTexValue(ground,0.0,0.0).x ;
+    color.y = getTexValue(ground,0.0,0.0).x -1.5;
+    color.z = getTexValue(ground,0.0,0.0).x -3.0;
  
 }

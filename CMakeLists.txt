@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 2.0)
 
 project(RTplacet)
 option(INTEGRATION_TEST "Build integration test" OFF)

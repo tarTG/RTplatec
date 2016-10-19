@@ -73,9 +73,17 @@ int main(int argc, char** argv)
     ground = std::make_unique<lithosphere>(seed, width, length,seaLevel,0.01,8000000, 3.00,10,terrainNoiseRoughness );
 
     std::unique_ptr<simpleRender> render = std::make_unique<simpleRender>(windowLength,windowHeight,"RTplatec");
+    
+        if(render->init() != 0)
+    {
+        std::cout << "Failed to init window!";
+        return 0;
+    }
+    
     std::unique_ptr<inputHandler> input = std::make_unique<inputHandler>(render->getWindow());
     
-    TwBar* lithoParameter = input->createNewBar("Parameter for platec");
+    TwBar* lithoParameter = input->createNewBar("Parameter");
+    TwDefine("Parameter position='8 8' size='200 400'"); 
     TwAddVarRW(lithoParameter,"Noise Roughness",TW_TYPE_FLOAT,&terrainNoiseRoughness,"group='Tectonic' max=4 min = 0.1 step=0.1 help='set roughness of terrain' " );   
     TwAddVarRW(lithoParameter,"SeaLevel",TW_TYPE_FLOAT,&seaLevel,"group='Tectonic' max=1.0 min = 0.0 step=0.02 help='set sea Level for next terrain' " );   
     TwAddVarRW(lithoParameter,"enable/disable",TW_TYPE_BOOL32,&enable_tectonic,"group='Tectonic' help='Enable/Disable tectonic update.' " );
@@ -89,11 +97,7 @@ int main(int argc, char** argv)
     TwAddVarRO(lithoParameter,"Frames",TW_TYPE_FLOAT,&frameTime," help='Current Frames per Seconds' " );   
 
     
-    if(render->init() != 0)
-    {
-        std::cout << "Failed to init window!";
-        return 0;
-    }
+
 
     auto timeBeforeLoop =  std::chrono::high_resolution_clock::now();        
     glViewport(0, 0, windowLength, windowHeight);
@@ -143,8 +147,9 @@ int main(int argc, char** argv)
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
         glBindTexture(GL_TEXTURE_2D, 0);
         glUseProgram(0);
+                 input->update();
         render->render();
-         input->update();
+
         frameTime = 1.f/(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - timeBeforeLoop).count()/1000.f);        // the difference
   
     }
