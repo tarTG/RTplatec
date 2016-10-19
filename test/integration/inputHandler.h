@@ -18,22 +18,39 @@
 #include <AntTweakBar.h>
 
 
-
+/*
+ * Simple input Handler 
+ */
 class inputHandler {
 public:
+
+    /**
+     * Constructor for input Handling
+     */
     inputHandler(GLFWwindow* window);
     
+    /**
+     * Generate a new anttweak bar
+     * @param description - Name of the bar
+     * @return referenze to the Bar. Destruction is handled in exit.
+     */
     TwBar* createNewBar(const std::string& description);
     
+    /**
+     * update all anttweak bars
+     */
     void update();
     
+    /**
+     * Close input handling
+     */
     void exit();
-    int getHeight() const;
-    int getWidth() const;
+    
 
 private:
-    int width, height;
-    GLFWwindow* window;
+
+    GLFWwindow* window; //reference to the window
+    float scorllpos;
 };
 
 #endif /* INPUTHANDLER_H */

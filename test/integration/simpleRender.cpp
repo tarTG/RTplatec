@@ -23,23 +23,25 @@ windowHeight(windowHeight),windowLength(windowLength), windowTitle(windowTitle)
 
 u_int32_t simpleRender::init() 
 {
-    if (!glfwInit())
+    if (!glfwInit()) //try to init glfw
           return 1;
 
+    //set OpenGL context to Version 4.4
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,4);    
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    //create Window
     window = glfwCreateWindow(windowLength, windowHeight, windowTitle.c_str(), NULL, NULL);
-    if (!window)
+    if (!window) //if window does not exist
     {
-        glfwTerminate();
+        glfwTerminate(); //close context
         return 1;
     }
-    
+    //set context to window
     glfwMakeContextCurrent(window);
         
-    if(gl3wInit() !=  0)   
+    if(gl3wInit() !=  0)   //init gl3w
     {
         glfwTerminate();
         return 1;
@@ -49,8 +51,8 @@ u_int32_t simpleRender::init()
 
 void simpleRender::clearWindow() 
 {
-    glClearColor(1.f, 1.f,1.f, 1.f);
-    glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT );    
+    glClearColor(1.f, 1.f,1.f, 1.f); //clear Window to white
+    glClear( GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT );    //clear Color buffer and Depth Buffer
 }
 
 
@@ -68,9 +70,8 @@ void simpleRender::render()
 
 void simpleRender::exit()
 {
-    glfwDestroyWindow(window);
-    
-    glfwTerminate();
+    glfwDestroyWindow(window);//destryo window
+    glfwTerminate(); //exit glfw
 }
 
 GLFWwindow* simpleRender::getWindow() const 

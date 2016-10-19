@@ -19,27 +19,52 @@
 #include <AntTweakBar.h>
 #include <string>
 
+/*
+ *  Class to handle simple render stuff
+ */
 class simpleRender 
 {
 public:
+    /**
+     * Constructor for simpleRender
+     * @param windowLength - lenght of the window
+     * @param windowHeight - height of the window
+     * @param windowTitle - titel of the window
+     */
     simpleRender(u_int32_t windowLength, uint32_t windowHeight,std::string windowTitle);
     
+    /**
+     * initialize GLFW, GL3W, OpenGL context and window
+     */
     u_int32_t init();
     
+    /**
+     * clear content of the window
+     */
     void clearWindow();
     
+    /**
+     * swap buffers and poll events
+     */
     void render();
     
+    /**
+     * close OpenGL context and window
+     */
     void exit();
     
+    /**
+     * get Pointer to the window
+     */
     GLFWwindow* getWindow() const;
     
-    u_int32_t windowHeight,windowLength;
+
 
 
 private:
-    std::string windowTitle;
-    GLFWwindow* window;
+        u_int32_t windowHeight,windowLength; //window dimensions
+    std::string windowTitle; //window title
+    GLFWwindow* window; //window refrence
 };
 
 #endif /* SIMPLERENDER_H */

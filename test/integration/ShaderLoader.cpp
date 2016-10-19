@@ -15,9 +15,9 @@
 
 GLuint ShaderLoader::generateProgram(const std::string& pathName) 
 {
-    GLuint program = glCreateProgram();
+    GLuint program = glCreateProgram(); //create a new program
 
-    
+    //try to load and attach shader stages
     ShaderLoader::attachShader(program,pathName + ".vs.glsl",GL_VERTEX_SHADER);
 
     ShaderLoader::attachShader(program, pathName + ".tcs.glsl", GL_TESS_CONTROL_SHADER);
@@ -30,27 +30,28 @@ GLuint ShaderLoader::generateProgram(const std::string& pathName)
     
     ShaderLoader::attachShader(program, pathName + ".cs.glsl",GL_COMPUTE_SHADER);
     
-    
+    //link program
     glLinkProgram(program);
     GLint status;
-    glGetProgramiv(program, GL_LINK_STATUS, &status);
+    glGetProgramiv(program, GL_LINK_STATUS, &status); //get program status
 
-    if (!status)
+    if (!status) //if there is an error
     {
+        //print error to console
         char buffer[4096];
         glGetProgramInfoLog(program, 4096, NULL, buffer);
         std::cout << "Error Program link in " << buffer << std::endl;
         glDeleteProgram(program);
         return 0;
     }
-    return program;
+    return program; //return ID
 }
 
 void ShaderLoader::attachShader(GLuint& program, std::string filename, GLenum shader_type) 
 {
-    GLuint ret =  loadShaders( filename,shader_type);
-    if(ret != 0)
-        glAttachShader(program, ret);
+    GLuint ret =  loadShaders( filename,shader_type); //load shader 
+    if(ret != 0) //if shader exists
+        glAttachShader(program, ret); //attach to program
 }
 
 
@@ -62,38 +63,39 @@ GLuint ShaderLoader::loadShaders(const std::string filename, GLenum shader_type)
     size_t filesize;
     char * data;
     
-    fp = fopen(filename.c_str(), "rb");
+    fp = fopen(filename.c_str(), "rb"); //read from file
     
-    if (!fp)
-        return result;
+    if (!fp) //if not available
+        return result; //return 0
     
+    //get filesize
     fseek(fp, 0, SEEK_END);
     filesize = ftell(fp);
-    fseek(fp, 0, SEEK_SET);
+    fseek(fp, 0, SEEK_SET); //reset file pointer
 
-    data =  new char [filesize + 1];    
+    data =  new char [filesize + 1];    //create buffer
     
-    if (!data)
-        return result;
+    if (!data) //if this fails
+        return result; //return 0 
 
-    fread(data, 1, filesize, fp);
+    fread(data, 1, filesize, fp); //read data from file to buffer
     data[filesize] = 0;
-    fclose(fp);
+    fclose(fp); //close file
 
-    result = glCreateShader(shader_type);
+    result = glCreateShader(shader_type); //create shader
 
-    if (!result)
-        return result;
+    if (!result) //if shader is not created
+        return result; //return 0
 
-    glShaderSource(result, 1, &data, NULL);
+    glShaderSource(result, 1, &data, NULL); //add shader source
 
-
+    //compie shader
     glCompileShader(result);
 
     GLint status = 0;
-    glGetShaderiv(result, GL_COMPILE_STATUS, &status);
+    glGetShaderiv(result, GL_COMPILE_STATUS, &status); //get shader status
 
-    if (!status)
+    if (!status) //if there is an error, print to console
     {
         char buffer[4096] ;
         glGetShaderInfoLog(result, 4096, NULL, buffer);
@@ -102,8 +104,8 @@ GLuint ShaderLoader::loadShaders(const std::string filename, GLenum shader_type)
         glDeleteShader(result);
     }
     
-    delete[] data;
+    delete[] data; //delete buffer
     
-    return result;
+    return result; //return shader ID
 
 }

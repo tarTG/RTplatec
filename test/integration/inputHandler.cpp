@@ -16,7 +16,8 @@
 
 inputHandler::inputHandler(GLFWwindow* window) : window(window)
 {
-    
+    //get window dimensions
+    int width,height;
      	glfwGetWindowSize(window,&width, &height);
     // Initialize AntTweakBar
     TwInit(TW_OPENGL_CORE, NULL);
@@ -24,7 +25,6 @@ inputHandler::inputHandler(GLFWwindow* window) : window(window)
     
     
     // Set GLFW event callbacks
-    
     // - Redirect window size changes to the callback function WindowSizeCB
     glfwSetWindowSizeCallback(window,[&](GLFWwindow*,int newWidth, int newHeight){TwWindowSize(newWidth, newHeight);glViewport(0, 0, newWidth, newHeight);});
     // - Directly redirect GLFW mouse button events to AntTweakBar
@@ -32,11 +32,11 @@ inputHandler::inputHandler(GLFWwindow* window) : window(window)
     // - Directly redirect GLFW mouse position events to AntTweakBar
     glfwSetCursorPosCallback(window,[&](GLFWwindow* window, double x, double y){TwEventMousePosGLFW((int)x,(int)y);});
     // - Directly redirect GLFW mouse wheel events to AntTweakBar
-    glfwSetScrollCallback(window,[&](GLFWwindow* window, double x, double y){TwEventMouseWheelGLFW(y );});
+    glfwSetScrollCallback(window,[&](GLFWwindow* window, double x, double y){TwEventMouseWheelGLFW(y );}); //is not correct.. but i dont know any workarround
     // - Directly redirect GLFW key events to AntTweakBar
     glfwSetKeyCallback(window,[&](GLFWwindow* window,int key, int scancode, int action, int mods){TwEventKeyGLFW(key,action);});
     // - Directly redirect GLFW char events to AntTweakBar
-    glfwSetCharModsCallback(window,[&](GLFWwindow* window,unsigned int codepoint,int mods){TwEventCharGLFW(codepoint,1);});
+    glfwSetCharCallback(window,[&](GLFWwindow* window,unsigned int codepoint){TwEventCharGLFW(codepoint,1);});
 }
 
 TwBar* inputHandler::createNewBar(const std::string& description) 
@@ -58,15 +58,6 @@ void inputHandler::exit()
     TwTerminate();
 }
 
-int inputHandler::getHeight() const
-{
-    return height;
-}
-
-int inputHandler::getWidth() const
-{
-    return width;
-}
 
 
 
