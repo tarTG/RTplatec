@@ -7,13 +7,13 @@
 
 layout (binding = 0) uniform sampler2D ground;
 
-uniform float windowLenght = 800;
+uniform float windowLength = 800;
 uniform float windowHeigth = 600;
 
 vec3 getTexValue(sampler2D tex, float x, float y)
 {
-    vec2 div = textureSize(tex,0)/vec2(windowLenght,windowHeigth);
-    return texture(tex, (div*gl_FragCoord.xy)/(textureSize(tex,0))).xyz;
+    vec2 div = textureSize(tex,0)/vec2(windowLength,windowHeigth);
+    return texture(tex, div*(gl_FragCoord.xy)/(textureSize(tex,0))).xyz;
 }
 
 out vec3 color;

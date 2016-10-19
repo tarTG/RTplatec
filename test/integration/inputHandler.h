@@ -28,8 +28,11 @@ public:
     void update();
     
     void exit();
+    int getHeight() const;
+    int getWidth() const;
 
 private:
+    int width, height;
     GLFWwindow* window;
 };
 

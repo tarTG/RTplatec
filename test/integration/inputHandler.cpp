@@ -14,16 +14,9 @@
 #include "inputHandler.h"
 
 
-// Callback function called by GLFW when window size changes
-void  WindowSizeCB(int width, int height)
-{
-    glViewport(0, 0, width, height);
-    // Send the new window size to AntTweakBar
-    TwWindowSize(width, height);
-}
 inputHandler::inputHandler(GLFWwindow* window) : window(window)
 {
-    int width, height;
+    
      	glfwGetWindowSize(window,&width, &height);
     // Initialize AntTweakBar
     TwInit(TW_OPENGL_CORE, NULL);
@@ -33,17 +26,17 @@ inputHandler::inputHandler(GLFWwindow* window) : window(window)
     // Set GLFW event callbacks
     
     // - Redirect window size changes to the callback function WindowSizeCB
-    glfwSetWindowSizeCallback(window,(GLFWwindowsizefun)WindowSizeCB);
+    glfwSetWindowSizeCallback(window,[&](GLFWwindow*,int newWidth, int newHeight){TwWindowSize(newWidth, newHeight);glViewport(0, 0, newWidth, newHeight);});
     // - Directly redirect GLFW mouse button events to AntTweakBar
-    glfwSetMouseButtonCallback(window,(GLFWmousebuttonfun)TwEventMouseButtonGLFW);
+    glfwSetMouseButtonCallback(window,[&](GLFWwindow* window, int button, int action, int mods){TwEventMouseButtonGLFW(button,action);});
     // - Directly redirect GLFW mouse position events to AntTweakBar
-    glfwSetCursorPosCallback(window,(GLFWcursorposfun)TwEventMousePosGLFW);
+    glfwSetCursorPosCallback(window,[&](GLFWwindow* window, double x, double y){TwEventMousePosGLFW((int)x,(int)y);});
     // - Directly redirect GLFW mouse wheel events to AntTweakBar
-    glfwSetScrollCallback(window,(GLFWscrollfun)TwEventMouseWheelGLFW);
+    glfwSetScrollCallback(window,[&](GLFWwindow* window, double x, double y){TwEventMouseWheelGLFW(y );});
     // - Directly redirect GLFW key events to AntTweakBar
-    glfwSetKeyCallback(window,(GLFWkeyfun)TwEventKeyGLFW);
+    glfwSetKeyCallback(window,[&](GLFWwindow* window,int key, int scancode, int action, int mods){TwEventKeyGLFW(key,action);});
     // - Directly redirect GLFW char events to AntTweakBar
-    glfwSetCharCallback(window,(GLFWcharfun)TwEventCharGLFW);
+    glfwSetCharModsCallback(window,[&](GLFWwindow* window,unsigned int codepoint,int mods){TwEventCharGLFW(codepoint,1);});
 }
 
 TwBar* inputHandler::createNewBar(const std::string& description) 
@@ -63,6 +56,16 @@ void inputHandler::update()
 void inputHandler::exit() 
 {
     TwTerminate();
+}
+
+int inputHandler::getHeight() const
+{
+    return height;
+}
+
+int inputHandler::getWidth() const
+{
+    return width;
 }
 
 
