@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(RTplacet)
-option(INTEGRATION_TEST "Build integration test" OFF)
+set(PROJECT_VERSION 1.0)
+
+message(STATUS "~~~ ${PROJECT_NAME} - v${PROJECT_VERSION} ~~~")
+
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 

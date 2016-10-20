@@ -83,8 +83,8 @@ GLuint ShaderLoader::loadShaders(const std::string filename, GLenum shader_type)
     if (!data) //if this fails
         return result; //return 0 
 
-    fread(data, 1, filesize, fp); //read data from file to buffer
-    data[filesize] = 0;
+    auto index =  fread(data, 1, filesize, fp); //read data from file to buffer
+    data[index] = 0;
     fclose(fp); //close file
 
     result = glCreateShader(shader_type); //create shader
