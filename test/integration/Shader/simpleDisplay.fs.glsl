@@ -22,6 +22,7 @@ const float COLOR_STEP=	1.5f;
 
 vec3 renderHeightMap(float c)
 {
+    vec3 color = vec3(0.0);
     if (c < 0.5)
         color = vec3(0.0, 0.0, 0.25 + 1.5 * c);
     else if (c < 1.0)
@@ -53,9 +54,10 @@ vec3 renderHeightMap(float c)
             while (c > 2.0 * COLOR_STEP)
                     c -= 2.0 * COLOR_STEP;
 
-            color = vec3(1, 1 - c / 4.0, 1);
+            color = vec3(1, 1 , 1);
         }
     }
+    return color;
 }
 void main() 
 {

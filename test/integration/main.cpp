@@ -29,6 +29,11 @@ u_int32_t textureWidth = 600, textureLength = 800; // start texture Dimensions
 float seaLevel = 0.5;                 //start sea level
 float terrainNoiseRoughness = 0.7;    //start terrain noise roughness
     
+
+constexpr float startFoldingRation = 0.01;
+constexpr float startAggrOverlapAbs = 8000000;
+constexpr float startAggrOverlapRel = 3.00;
+constexpr unsigned int startMaxPlates = 10;
 /**
  * AntTweak callback to make new plates
  * @param clientData - is void, but pointer to lithosphere* is used
@@ -57,7 +62,7 @@ void TW_CALL CBrestart(void *clientData)
     TwRemoveVar(guiBar,"New Tectonic");
     
     //set new Gui references of the new lithosphre
-   TwAddVarRW(guiBar,"max Plates",TW_TYPE_UINT32,&ground->max_plates,"group='Tectonic' min=1.0 max = 10.0 help='Max Plate count for next start.'" );
+   TwAddVarRW(guiBar,"max Plates",TW_TYPE_UINT32,&ground->max_plates,"group='Tectonic' min=1.0 max = 20.0 help='Max Plate count for next start.'" );
    TwAddVarRW(guiBar,"Folding Ratio",TW_TYPE_FLOAT,&ground->folding_ratio,"group='Tectonic' max=1.0 min=0.0 step='0.01' help='Percent of overlapping crust that is folded.' " );   
    TwAddVarRW(guiBar,"Aggr Overlap Rel",TW_TYPE_FLOAT,&ground->aggr_overlap_rel,"group='Tectonic' max=1.0 min=0.0 step='0.03' help='% of overlapping area -> aggregation.' " );   
    TwAddVarRW(guiBar,"Aggr Overlap Abs",TW_TYPE_UINT32,&ground->aggr_overlap_abs,"group='Tectonic' max=2000000 min=0.0 step='10000' help='# of overlapping pixels -> aggregation.' " );   
@@ -85,7 +90,7 @@ void TW_CALL CBnewWorld(void *clientData)
     TwRemoveVar(guiBar,"New Tectonic");
     
     //set new Gui references of the new lithosphre
-   TwAddVarRW(guiBar,"max Plates",TW_TYPE_UINT32,&ground->max_plates,"group='Tectonic' min=1.0 max = 10.0 help='Max Plate count for next start.'" );
+   TwAddVarRW(guiBar,"max Plates",TW_TYPE_UINT32,&ground->max_plates,"group='Tectonic' min=1.0 max = 20.0 help='Max Plate count for next start.'" );
    TwAddVarRW(guiBar,"Folding Ratio",TW_TYPE_FLOAT,&ground->folding_ratio,"group='Tectonic' max=1.0 min=0.0 step='0.01' help='Percent of overlapping crust that is folded.' " );   
    TwAddVarRW(guiBar,"Aggr Overlap Rel",TW_TYPE_FLOAT,&ground->aggr_overlap_rel,"group='Tectonic' max=1.0 min=0.0 step='0.03' help='% of overlapping area -> aggregation.' " );   
    TwAddVarRW(guiBar,"Aggr Overlap Abs",TW_TYPE_UINT32,&ground->aggr_overlap_abs,"group='Tectonic' max=2000000 min=0.0 step='10000' help='# of overlapping pixels -> aggregation.' " );   
@@ -116,7 +121,7 @@ int main(int argc, char** argv)
     seed = rand();     //generate a random number
 
     //generate a new lithosphere.
-    ground = std::make_unique<lithosphere>(seed, textureWidth, textureLength,seaLevel,0.01,8000000, 3.00,10,terrainNoiseRoughness );
+    ground = std::make_unique<lithosphere>(seed, textureWidth, textureLength,seaLevel,startFoldingRation,startAggrOverlapAbs,startAggrOverlapRel,startMaxPlates,terrainNoiseRoughness );
 
     //initalize rendering
     std::unique_ptr<simpleRender> render = std::make_unique<simpleRender>(windowLength,windowHeight,"RTplatec");
@@ -139,7 +144,7 @@ int main(int argc, char** argv)
     TwAddVarRW(lithoParameter,"SeaLevel",TW_TYPE_FLOAT,&seaLevel,"group='Tectonic' max=1.0 min = 0.0 step=0.02 help='set sea Level for next terrain' " );   
     TwAddVarRW(lithoParameter,"enable/disable",TW_TYPE_BOOLCPP,&enable_tectonic,"group='Tectonic' help='Enable/Disable tectonic update.' " );
     TwAddVarRW(lithoParameter,"Render age map",TW_TYPE_BOOLCPP,&renderAgeMap,"group='Tectonic' help='Render Age Map.' " );
-    TwAddVarRW(lithoParameter,"max Plates",TW_TYPE_UINT32,&ground->max_plates,"group='Tectonic' min=1.0 max = 10.0 help='Max Plate count for next start.'" );
+    TwAddVarRW(lithoParameter,"max Plates",TW_TYPE_UINT32,&ground->max_plates,"group='Tectonic' min=1.0 max = 20.0 help='Max Plate count for next start.'" );
     TwAddVarRW(lithoParameter,"Folding Ratio",TW_TYPE_FLOAT,&ground->folding_ratio,"group='Tectonic' max=1.0 min=0.0 step='0.01' help='% of overlapping crust that iss folded.' " );   
     TwAddVarRW(lithoParameter,"Aggr Overlap Rel",TW_TYPE_FLOAT,&ground->aggr_overlap_rel,"group='Tectonic' max=1.0 min=0.0 step='0.03' help='% of overlapping area -> aggregation.' " );   
     TwAddVarRW(lithoParameter,"Aggr Overlap Abs",TW_TYPE_UINT32,&ground->aggr_overlap_abs,"group='Tectonic' max=2000000 min=0.0 step='10000' help='# of overlapping pixels -> aggregation.' " );   

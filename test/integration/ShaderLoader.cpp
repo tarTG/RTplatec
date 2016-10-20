@@ -11,6 +11,8 @@
  * Created on 18. Oktober 2016, 12:39
  */
 
+#include <sstream>
+
 #include "ShaderLoader.h"
 
 GLuint ShaderLoader::generateProgram(const std::string& pathName) 
@@ -40,7 +42,9 @@ GLuint ShaderLoader::generateProgram(const std::string& pathName)
         //print error to console
         char buffer[4096];
         glGetProgramInfoLog(program, 4096, NULL, buffer);
-        std::cout << "Error Program link in " << buffer << std::endl;
+        std::stringstream s;        
+        s << buffer;
+        std::cout  << "Error Program link in "  << s.str()<< std::endl;
         glDeleteProgram(program);
         return 0;
     }
@@ -62,6 +66,7 @@ GLuint ShaderLoader::loadShaders(const std::string filename, GLenum shader_type)
     FILE * fp;
     size_t filesize;
     char * data;
+    
     
     fp = fopen(filename.c_str(), "rb"); //read from file
     
@@ -99,8 +104,9 @@ GLuint ShaderLoader::loadShaders(const std::string filename, GLenum shader_type)
     {
         char buffer[4096] ;
         glGetShaderInfoLog(result, 4096, NULL, buffer);
-
-        std::cout << "Fail Shader " << filename  << " in " << buffer << std::endl;
+        std::stringstream s;
+        s <<"Fail Shader " << filename  << " in " << buffer;
+        std::cout << s.str() << std::endl;
         glDeleteShader(result);
     }
     

@@ -11,7 +11,40 @@
  * Created on 18. Oktober 2016, 10:35
  */
 
+#include <functional>
+
 #include "inputHandler.h"
+
+static void windowSizeCallback(GLFWwindow*,int newWidth, int newHeight)
+{
+    TwWindowSize(newWidth, newHeight);glViewport(0, 0, newWidth, newHeight);
+}
+
+static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+{
+    TwEventMouseButtonGLFW(button,action);
+}
+static void cursorPosCallback(GLFWwindow* window, double x, double y)
+{
+    TwEventMousePosGLFW((int)x,(int)y);
+}
+
+static void scrollCallback(GLFWwindow* window, double x, double y)
+{
+    static double lastscrollPos = 0;
+    lastscrollPos += y;
+    TwEventMouseWheelGLFW(lastscrollPos );
+}
+
+static void keyCallback(GLFWwindow* window,int key, int scancode, int action, int mods)
+{
+    TwEventKeyGLFW(key,action);
+}
+
+static void charCallback(GLFWwindow* window,unsigned int codepoint)
+{
+    TwEventCharGLFW(codepoint,1);
+}
 
 
 inputHandler::inputHandler(GLFWwindow* window) : window(window)
@@ -26,17 +59,17 @@ inputHandler::inputHandler(GLFWwindow* window) : window(window)
     
     // Set GLFW event callbacks
     // - Redirect window size changes to the callback function WindowSizeCB
-    glfwSetWindowSizeCallback(window,[&](GLFWwindow*,int newWidth, int newHeight){TwWindowSize(newWidth, newHeight);glViewport(0, 0, newWidth, newHeight);});
+    glfwSetWindowSizeCallback(window,windowSizeCallback);
     // - Directly redirect GLFW mouse button events to AntTweakBar
-    glfwSetMouseButtonCallback(window,[&](GLFWwindow* window, int button, int action, int mods){TwEventMouseButtonGLFW(button,action);});
+    glfwSetMouseButtonCallback(window,mouseButtonCallback);
     // - Directly redirect GLFW mouse position events to AntTweakBar
-    glfwSetCursorPosCallback(window,[&](GLFWwindow* window, double x, double y){TwEventMousePosGLFW((int)x,(int)y);});
+    glfwSetCursorPosCallback(window,cursorPosCallback);
     // - Directly redirect GLFW mouse wheel events to AntTweakBar
-    glfwSetScrollCallback(window,[&](GLFWwindow* window, double x, double y){TwEventMouseWheelGLFW(y );}); //is not correct.. but i dont know any workarround
+    glfwSetScrollCallback(window,scrollCallback); 
     // - Directly redirect GLFW key events to AntTweakBar
-    glfwSetKeyCallback(window,[&](GLFWwindow* window,int key, int scancode, int action, int mods){TwEventKeyGLFW(key,action);});
+    glfwSetKeyCallback(window,keyCallback);
     // - Directly redirect GLFW char events to AntTweakBar
-    glfwSetCharCallback(window,[&](GLFWwindow* window,unsigned int codepoint){TwEventCharGLFW(codepoint,1);});
+    glfwSetCharCallback(window,charCallback);
 }
 
 TwBar* inputHandler::createNewBar(const std::string& description) 
