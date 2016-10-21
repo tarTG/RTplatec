@@ -13,6 +13,9 @@ A fork of platec (https://github.com/Mindwerks/plate-tectonics) to fit the needs
 - Example Programm uses Shader, which enables resizeable window
 - small performance opitmisation
 
+
+![](screenshots/RTplatecExample.png?raw=true)
+
 ## Reqirements
 
 - For the integration test: a OpenGL 4.+ context
