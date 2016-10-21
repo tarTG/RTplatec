@@ -25,4 +25,4 @@ add_subdirectory("src")
 
 if(INTEGRATION_TEST)
     add_subdirectory("test")
-endif
+endif()
