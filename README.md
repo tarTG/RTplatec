@@ -33,7 +33,7 @@ A fork of platec (https://github.com/Mindwerks/plate-tectonics) to fit the needs
 
 ### Library and integration test
 - go to the RTplatec folder
-- sudo scipts/installDependencies
+- sudo scipts/installDependencies.sh
     - will install glfw3, gl3w and anttweakbar
 - cmake -DINTEGRATION_TEST=ON ..
 - make all
@@ -44,8 +44,8 @@ A fork of platec (https://github.com/Mindwerks/plate-tectonics) to fit the needs
 - extend integration test (texture export, different shaders, more options)
 
 ## Credits
-Credits go to the original platec developter Lauri Viitanen ( http://sourceforge.net/projects/platec/ )
-and to the @ftomassetti and his plate-tectonics project ( https://github.com/Mindwerks/plate-tectonics ) 
+Credits go to the original platec developer Lauri Viitanen ( http://sourceforge.net/projects/platec/ )
+and to @ftomassetti and his plate-tectonics project ( https://github.com/Mindwerks/plate-tectonics ) 
 for massive improvement of platec.
 
 
