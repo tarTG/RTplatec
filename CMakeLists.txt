@@ -5,6 +5,7 @@ set(PROJECT_VERSION 1.0)
 
 message(STATUS "~~~ ${PROJECT_NAME} - v${PROJECT_VERSION} ~~~")
 
+option(INTEGRATION_TEST "build integration test" OFF)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -22,4 +23,6 @@ add_definitions( -std=c++14 )
 add_subdirectory("3rdParty")
 add_subdirectory("src")
 
+if(INTEGRATION_TEST)
     add_subdirectory("test")
+endif
