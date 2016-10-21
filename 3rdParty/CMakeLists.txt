@@ -1,3 +1,6 @@
 
 add_subdirectory(libNoiseUtils)
-add_subdirectory(GL3W)
+
+if(INTEGRATION_TEST)
+    add_subdirectory(GL3W)
+endif()
