@@ -13,7 +13,7 @@
 
 #include "FractalGenerator.h"
 #include <time.h>
-#include <libnoise/noise.h>
+#include <noise.h>
 #include <stdio.h>
 #include "../3rdParty/libNoiseUtils/noiseutils.h"
 
