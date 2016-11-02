@@ -5,11 +5,8 @@ add_library(RTplatec
 	simplerandom.cpp
 	movement.cpp   
 	rectangle.cpp        
-	simplexnoise.cpp
 	geometry.cpp     
-	noise.cpp      
 	segment_creator.cpp  
-	sqrdmd.cpp
 	heightmap.cpp    
 	platecapi.cpp  
 	segment_data.cpp     

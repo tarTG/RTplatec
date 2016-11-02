@@ -67,26 +67,7 @@ plate::plate(long seed, float* m, uint32_t w, uint32_t h, uint32_t _x, uint32_t 
     segments->setBounds(_bounds);
 }
 
-void plate::setMap(float* map,uint32_t plate_age)
-{
-    this->map.copy(HeightMap(map,this->getWidth(),this->getHeight()));
-       uint32_t k;
-//    for (uint32_t y = k = 0; y < _bounds->height(); ++y) {
-//        for (uint32_t x = 0; x < _bounds->width(); ++x, ++k) {
-//            // Set the age of ALL points in this plate to same
-//            // value. The right thing to do would be to simulate
-//            // the generation of new oceanic crust as if the plate
-//            // had been moving to its current direction until all
-//            // plate's (oceanic) crust receive an age.
-//            age_map.set(x, y, plate_age & -(map[k] > 0));
-//        }
-//    }
-//    Segments* segments = new Segments(this->getWidth()*this->getHeight());
-//    _segments = segments;
-//    _mySegmentCreator = new MySegmentCreator(*_bounds, _segments, this->map, _worldDimension);
-//    segments->setSegmentCreator(_mySegmentCreator);
-//    segments->setBounds(_bounds);
-}
+
 
 plate::~plate()
 {

@@ -19,9 +19,6 @@
 
 #include "lithosphere.hpp"
 #include "plate.hpp"
-#include "sqrdmd.hpp"
-#include "simplexnoise.hpp"
-#include "noise.hpp"
 #include "FractalGenerator.h"
 
 #include <cfloat>
@@ -61,15 +58,7 @@ WorldPoint lithosphere::randomPosition()
                _worldDimension);
 }
 
-void lithosphere::createNoise(float* tmp, const WorldDimension& tmpDim, bool useSimplex)
-{
-    ::createNoise(tmp, tmpDim, _randsource, useSimplex);
-}
 
-void lithosphere::createSlowNoise(float* tmp, const WorldDimension& tmpDim)
-{
-    ::createSlowNoise(tmp, tmpDim, _randsource);
-}
 
 lithosphere::lithosphere(long seed, uint32_t width, uint32_t height, float sea_level,
                           float _folding_ratio, uint32_t aggr_ratio_abs,

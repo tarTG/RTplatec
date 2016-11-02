@@ -43,7 +43,7 @@ void Movement::applyFriction(float deformed_mass, float mass) {
         return;
     }
     float vel_dec = DEFORMATION_WEIGHT * deformed_mass / mass;
-    vel_dec = vel_dec < velocity ? vel_dec : velocity;
+    vel_dec = std::min(vel_dec,velocity);
 
     // Altering the source variable causes the order of calls to
     // this function to have difference when it shouldn't!

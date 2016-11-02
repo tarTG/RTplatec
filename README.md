@@ -27,6 +27,8 @@ A fork of platec (https://github.com/Mindwerks/plate-tectonics) to fit the needs
 ### Just the library 
 - sudo apt-get install libnoise-dev
 - go to the RTplatec folder
+- mkdir build
+- cd build
 - cmake ..
 - make all
 - library can be found in build/src/libRTplatec.a
@@ -35,6 +37,8 @@ A fork of platec (https://github.com/Mindwerks/plate-tectonics) to fit the needs
 - go to the RTplatec folder
 - sudo scipts/installDependencies.sh
     - will install glfw3, gl3w and anttweakbar
+- mkdir build
+- cd build
 - cmake -DINTEGRATION_TEST=ON ..
 - make all
 - binary can be found in build/test/integration/main

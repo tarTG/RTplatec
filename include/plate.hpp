@@ -282,7 +282,7 @@ public:
         delete _bounds;
         _bounds = bounds;
     }
-    void setMap(float*  map,uint32_t plate_age);
+
 
 private:
 

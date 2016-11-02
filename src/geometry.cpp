@@ -170,15 +170,15 @@ uint32_t WorldDimension::normalizedIndexOf(const uint32_t x, const uint32_t y) c
 
 uint32_t WorldDimension::xCap(const uint32_t x) const
 {
-    return x < _width ? x : (_width-1);
+    return std::min(x,_width-1);
 }
 
 uint32_t WorldDimension::yCap(const uint32_t y) const
 {
-    return y < _height ? y : (_height-1);
+    return std::min(y,_height-1);
 }
 
 uint32_t WorldDimension::largerSize() const
 {
-    return _width > _height ? _width : _height;
+    return std::max(_width,_height); 
 }
