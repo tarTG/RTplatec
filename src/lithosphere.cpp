@@ -62,7 +62,7 @@ WorldPoint lithosphere::randomPosition()
 
 lithosphere::lithosphere(long seed, uint32_t width, uint32_t height, float sea_level,
                           float _folding_ratio, uint32_t aggr_ratio_abs,
-                         float aggr_ratio_rel,  uint32_t _max_plates, float roughness ) throw(invalid_argument) :
+                         float aggr_ratio_rel,  uint32_t _max_plates, float roughness,const std::vector<float>& image ) throw(invalid_argument) :
                      
     hmap(width, height),
     amap(width, height),
@@ -88,8 +88,14 @@ lithosphere::lithosphere(long seed, uint32_t width, uint32_t height, float sea_l
         throw runtime_error("Width and height should be >=5");
     }
 
-
+    if(image.empty())
+    {
         FractalGenerator::generateNoise(hmap.raw_data(),width,height,seed,roughness);
+    }
+    else
+    {
+        memcpy(hmap.raw_data(),image.data(),height*width*sizeof(float));
+    }
 
     const uint32_t A = _worldDimension.getArea();
     float lowest = *std::min_element(hmap.raw_data(), hmap.raw_data() +A);
@@ -157,7 +163,7 @@ void lithosphere::growPlates()
         for (max_border = i = 0; i < num_plates; ++i) {
             plateArea& area = plate_areas[i];
             const uint32_t N = (uint32_t)area.border.size();
-            max_border = max_border > N ? max_border : N;
+            max_border = std::max(max_border,N);
 
             if (N == 0) {
                 continue;
@@ -702,7 +708,7 @@ void lithosphere::update()
         _steps++;
 
         
-        float totalVelocity = std::accumulate(plates,plates+ num_plates,0.f,[&](float sum, auto& plate){return sum + plate->getVelocity();} );
+    //    float totalVelocity = std::accumulate(plates,plates+ num_plates,0.f,[&](float sum, auto& plate){return sum + plate->getVelocity();} );
         float systemKineticEnergy = std::accumulate(plates,plates+ num_plates,0.f,[&](float sum, auto& plate){return sum + plate->getMomentum();} );
         
 
@@ -838,16 +844,18 @@ void lithosphere::restart()
 
         // Update height map to include all recent changes.
         hmap.set_all(0);
-        for (uint32_t i = 0; i < num_plates; ++i)
+
+        std::for_each(plates, plates+num_plates,[&](auto& pla)
         {
-            const uint32_t x0 = plates[i]->getLeftAsUint();
-            const uint32_t y0 = plates[i]->getTopAsUint();
-            const uint32_t x1 = x0 + plates[i]->getWidth();
-            const uint32_t y1 = y0 + plates[i]->getHeight();
+
+            const uint32_t x0 = pla->getLeftAsUint();
+            const uint32_t y0 = pla->getTopAsUint();
+            const uint32_t x1 = x0 + pla->getWidth();
+            const uint32_t y1 = y0 + pla->getHeight();
 
             const float*  this_map;
             const uint32_t* this_age;
-            plates[i]->getMap(&this_map, &this_age);
+            pla->getMap(&this_map, &this_age);
 
             // Copy first part of plate onto world map.
             for (uint32_t y = y0, j = 0; y < y1; ++y)
@@ -866,7 +874,7 @@ void lithosphere::restart()
                     hmap[world_coord] += this_map[j];
                 }
             }
-        }
+        });
         // Clear plate array
         clearPlates();
 
@@ -877,18 +885,19 @@ void lithosphere::restart()
             createPlates();
 
             // Restore the ages of plates' points of crust!
-            for (uint32_t i = 0; i < num_plates; ++i)
-            {
-                const uint32_t x0 = plates[i]->getLeftAsUint();
-                const uint32_t y0 = plates[i]->getTopAsUint();
-                const uint32_t x1 = x0 + plates[i]->getWidth();
-                const uint32_t y1 = y0 + plates[i]->getHeight();
+
+          std::for_each(plates, plates+num_plates,[&](auto& pla)
+          {
+                const uint32_t x0 = pla->getLeftAsUint();
+                const uint32_t y0 = pla->getTopAsUint();
+                const uint32_t x1 = x0 + pla->getWidth();
+                const uint32_t y1 = y0 + pla->getHeight();
 
                 const float*  this_map;
                 const uint32_t* this_age_const;
                 uint32_t* this_age;
 
-                plates[i]->getMap(&this_map, &this_age_const);
+                pla->getMap(&this_map, &this_age_const);
                 this_age = (uint32_t *)this_age_const;
 
                 for (uint32_t y = y0, j = 0; y < y1; ++y)
@@ -899,7 +908,7 @@ void lithosphere::restart()
                         this_age[j] = amap[_worldDimension.indexOf( _worldDimension.xMod(x), y_mod)];
                     }
                 }
-            }
+            });
 
             return;
         }

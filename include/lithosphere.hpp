@@ -85,7 +85,8 @@ public:
     lithosphere(long seed,
                 uint32_t width, uint32_t height,
                 float sea_level, float _folding_ratio,
-                uint32_t aggr_ratio_abs, float aggr_ratio_rel, uint32_t _max_plates,float roughness) throw(std::invalid_argument);
+                uint32_t aggr_ratio_abs, float aggr_ratio_rel, uint32_t _max_plates,float roughness,
+                const std::vector<float>& image = std::vector<float>()) throw(std::invalid_argument);
 
     ~lithosphere() throw(); ///< Standard destructor.
 
