@@ -23,4 +23,4 @@ include_directories("${ANTTWEAKBAR_INCLUDE_DIR}" )
 include_directories("../../3rdParty/GL3W" )
 
 
-target_link_libraries(main RTplatec GL3W ${OPENGL_LIBRARIES}   ${GLFW_STATIC_LIBRARIES}      ${ANTTWEAKBAR_LIBRARY} ${LIBNOISE_LIBRARIES}  ${X11_LIBRARIES})
+target_link_libraries(main RTplatec dl GL3W ${OPENGL_LIBRARIES}   ${GLFW_STATIC_LIBRARIES}      ${ANTTWEAKBAR_LIBRARY} ${LIBNOISE_LIBRARIES}  ${X11_LIBRARIES})
