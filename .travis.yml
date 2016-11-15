@@ -28,5 +28,5 @@ script:
     - make all
 
 before_install:
-
+    - export LIBS=-ldl make
     - sudo  scripts/installDependencies.sh    
