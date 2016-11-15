@@ -7,6 +7,7 @@ apt-get install -y libnoise-dev
 #install glfw3
 add-apt-repository -y ppa:pyglfw/pyglfw && sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends libglfw3-dev libxrandr-dev libxi-dev libxxf86vm-dev libxcursor1
 #install gl3w
+apt-get install libxcursor-dev
 mkdir gl3w
 cd gl3w
 wget https://github.com/skaslev/gl3w/archive/master.zip 
