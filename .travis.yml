@@ -23,6 +23,7 @@ matrix:
 
 
 script:
+    - export USE_DL=1
     - mkdir build && cd build
     - cmake -DINTEGRATION_TEST=ON ..
     - make all
