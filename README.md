@@ -9,9 +9,9 @@ A fork of platec (https://github.com/Mindwerks/plate-tectonics) to fit the needs
 - Better start generation throught libnoise ( http://libnoise.sourceforge.net/ )
 - Adjustment of parameters during runtime
 - Option, to load a heightmap texture as a start terrain
-- Apply your own errosion and write back into platec via litosphere->setTopography
+- Apply your own errosion and write back into platec via lithosphere->setTopography
 - Example Programm uses Shader, which enables resizeable window
-- small performance opitmisation
+- small performance optimisation
 
 
 ![](screenshots/RTplatecExample.png?raw=true)
