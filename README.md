@@ -52,6 +52,4 @@ Credits go to the original platec developer Lauri Viitanen ( http://sourceforge.
 and to @ftomassetti and his plate-tectonics project ( https://github.com/Mindwerks/plate-tectonics ) 
 for massive improvement of platec.
 
-
-
  
